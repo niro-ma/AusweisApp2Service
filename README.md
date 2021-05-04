@@ -8,24 +8,33 @@ The Service class is a Singleton, which provides following features:
 * Sends commands to the SDK.
 
 # Usage
+Following are the commands which needs to be done to start working with the SDK. 
+A list of commands can be found here https://www.ausweisapp.bund.de/sdk/commands.html.
+A list of the messages can be found here https://www.ausweisapp.bund.de/sdk/messages.html.
 
 ### Setup
 It is mandatory to subscribe to the `Notification.ausweisApp2Messages` to receive the message of the SDK.
 
 ``` Swift
 override func viewDidLoad() {
-        super.viewDidLoad()
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(receivedAusweisServiceMessage(_:)),
-            name: Notification.ausweisApp2Messages,
-            object: nil
-        )
-    }
+   super.viewDidLoad()
+   NotificationCenter.default.addObserver(
+       self,
+       selector: #selector(receivedAusweisServiceMessage(_:)),
+       name: Notification.ausweisApp2Messages,
+       object: nil
+   )
+}
 ```
 
 ### Start Authentication
 
 ``` Swift
-AusweisApp2Service.shared.
+AusweisApp2Service.shared.sendCommand(Command.runAuth)
+```
+
+### Enter PIN
+
+``` Swift
+AusweisApp2Service.shared.sendCommand(Command.setPin(pin: 123456))
 ```
